@@ -49,4 +49,6 @@ group :development, :test do
   gem 'simplecov', require: false
   gem 'simplecov-rcov', require: false
   gem 'capybara'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
 end
