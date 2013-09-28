@@ -45,7 +45,7 @@ end
 # gem 'debugger', group: [:development, :test]
 
 group :development, :test do
-  gem 'rspec-rails', '~> 2.0'
+  gem 'rspec-rails'
   gem 'simplecov', require: false
   gem 'simplecov-rcov', require: false
   gem 'capybara'
