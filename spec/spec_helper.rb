@@ -49,4 +49,18 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = [:expect, :should]
   end
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :deletion
+    # DatabaseCleaner.strategy = :transaction
+    # DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 end
