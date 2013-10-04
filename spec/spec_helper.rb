@@ -47,7 +47,7 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.expect_with :rspec do |c|
-    c.syntax = [:expect, :should]
+    c.syntax = :expect
   end
 
   config.before(:suite) do
@@ -62,5 +62,21 @@ RSpec.configure do |config|
 
   config.after(:each) do
     DatabaseCleaner.clean
+  end
+end
+
+module RSpec
+  module Should
+    module DSL
+      refine BasicObject do
+        def should(matcher=nil, message=nil, &block)
+          ::RSpec::Expectations::PositiveExpectationHandler.handle_matcher(self, matcher, message, &block)
+        end
+
+        def should_not(matcher=nil, message=nil, &block)
+          ::RSpec::Expectations::NegativeExpectationHandler.handle_matcher(self, matcher, message, &block)
+        end
+      end
+    end
   end
 end
